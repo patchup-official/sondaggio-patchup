@@ -818,52 +818,33 @@ function goBack() {
   if (currentStep > 1) showStep(currentStep - 1);
 }
 
-/* ── INVIO A GOOGLE FORM (metodo iframe — più affidabile) ────────── */
-function submitSurvey() {
+/* ── INVIO A GOOGLE APPS SCRIPT ─────────────────────────────────── */
+async function submitSurvey() {
   const btn = document.getElementById('btn-4');
   btn.disabled = true;
   btn.textContent = 'Invio…';
 
-  const endpoint = `https://docs.google.com/forms/d/e/${FORM_CONFIG.formId}/formResponse`;
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbysrKNTzIXNEuW1JZUDzHLyG_6JsiQjP-4MWw0l_mt02jbfIe_eafkZFmM-DtZSvAbFjA/exec';
 
-  // Crea un form HTML nascosto e lo invia via iframe
-  const iframe = document.createElement('iframe');
-  iframe.name = 'hidden-submit';
-  iframe.style.display = 'none';
-  document.body.appendChild(iframe);
-
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = endpoint;
-  form.target = 'hidden-submit';
-  form.style.display = 'none';
-
-  // q1, q2, q3 — checkbox (più valori possibili)
+  // Raccoglie le risposte
+  const data = {};
   ['q1', 'q2', 'q3'].forEach(q => {
-    document.querySelectorAll(`input[name="${q}"]:checked`).forEach(el => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = FORM_CONFIG.entries[q];
-      input.value = el.value;
-      form.appendChild(input);
-    });
+    data[q] = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(el => el.value);
   });
+  data.q4 = document.getElementById('q4-text').value.trim();
 
-  // q4 — testo libero
-  const q4val = document.getElementById('q4-text').value.trim();
-  if (q4val) {
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = FORM_CONFIG.entries.q4;
-    input.value = q4val;
-    form.appendChild(input);
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (e) {
+    console.warn('Errore invio:', e);
   }
 
-  document.body.appendChild(form);
-  form.submit();
-
-  // Mostra grazie dopo breve attesa
-  setTimeout(showThanks, 800);
+  showThanks();
 }
 
 /* ── SCHERMATA GRAZIE ───────────────────────────────────────────── */
