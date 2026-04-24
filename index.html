@@ -284,6 +284,13 @@ img { display: block; max-width: 100%; }
   color: var(--muted); margin-top: 6px;
 }
 
+/* opzione disabilitata (max 2 selezionate) */
+.opt-disabled {
+  opacity: .38;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /* messaggio errore */
 .err {
   display: none;
@@ -561,7 +568,7 @@ img { display: block; max-width: 100%; }
           </div>
           <div class="q-title">Cosa cerchi davvero in un negozio di assistenza e riparazione?</div>
         </div>
-        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="q-hint">Scegli fino a 2 opzioni</div>
         <div class="opts">
 
           <label class="opt"><input type="checkbox" name="q1" value="Fiducia e parola data"><div class="opt-box"></div><span>puoi fidarti: il personale è di parola</span></label>
@@ -585,7 +592,7 @@ img { display: block; max-width: 100%; }
           </div>
           <div class="q-title">Che problemi hai avuto in passato con negozi di assistenza o riparazione?</div>
         </div>
-        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="q-hint">Scegli fino a 2 opzioni</div>
         <div class="opts">
 
           <label class="opt"><input type="checkbox" name="q2" value="Proposta non adatta"><div class="opt-box"></div><span>mi hanno proposto qualcosa che non faceva per me</span></label>
@@ -610,7 +617,7 @@ img { display: block; max-width: 100%; }
           </div>
           <div class="q-title">Cosa ti aspetti da un negozio di assistenza e riparazione del futuro?</div>
         </div>
-        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="q-hint">Scegli fino a 2 opzioni</div>
         <div class="opts">
 
           <label class="opt"><input type="checkbox" name="q3" value="Spazio per capire la tecnologia"><div class="opt-box"></div><span>un negozio dove non vai solo a riparare, ma a capire e scoprire la tecnologia</span></label>
@@ -859,12 +866,31 @@ document.getElementById('q4-text').addEventListener('input', function () {
   document.getElementById('char-curr').textContent = this.value.length;
 });
 
-/* ── NASCONDI ERRORE AL CLICK ───────────────────────────────────── */
+/* ── LIMITE MAX 2 RISPOSTE + NASCONDI ERRORE ────────────────────── */
 document.querySelectorAll('.opts').forEach(opts => {
   opts.addEventListener('change', () => {
     const step = currentStep;
+
+    // nascondi errore
     const err = document.getElementById('err-' + step);
     if (err) err.classList.remove('show');
+
+    // limita a max 2 checkbox selezionate
+    const checkboxes = opts.querySelectorAll('input[type="checkbox"]');
+    const checked = [...checkboxes].filter(c => c.checked);
+    if (checked.length >= 2) {
+      checkboxes.forEach(c => {
+        if (!c.checked) {
+          c.closest('.opt').classList.add('opt-disabled');
+          c.disabled = true;
+        }
+      });
+    } else {
+      checkboxes.forEach(c => {
+        c.closest('.opt').classList.remove('opt-disabled');
+        c.disabled = false;
+      });
+    }
   });
 });
 
