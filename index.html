@@ -125,28 +125,24 @@ img { display: block; max-width: 100%; }
   color: var(--orange);
 }
 
-/* HERO IMMAGINE TEAM */
+/* decorazione destra — blob organico */
 .hero-deco {
+  display: flex; align-items: center; justify-content: center;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 360px;
 }
-.hero-deco-bg {
-  position: absolute;
-  inset: 24px 0 24px 0;
-  background: rgba(244, 122, 32, 0.14);
-  border-radius: 36px;
-  clip-path: polygon(8% 10%, 96% 2%, 96% 88%, 78% 88%, 67% 100%, 18% 100%, 18% 88%, 8% 88%);
+.hero-deco svg.blob {
+  width: 100%; max-width: 320px;
+  position: absolute; opacity: .18;
 }
-.hero-deco img {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 360px;
-  height: auto;
+.hero-deco .deco-card {
+  position: relative; z-index: 2;
+  background: var(--orange);
+  border-radius: 24px;
+  width: 120px; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 12px 40px rgba(244,122,32,.35);
 }
+.hero-deco .deco-card svg { color: #fff; }
 
 /* ══════════════════════════════════════
    AREA SONDAGGIO
@@ -534,29 +530,152 @@ img { display: block; max-width: 100%; }
 
     <!-- decorazione destra -->
     <div class="hero-deco" aria-hidden="true">
-      <div class="hero-deco-bg"></div>
-      <img src="team.png" alt="Team PatchUP">
+      <!-- blob organico di sfondo -->
+      <svg class="blob" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M320,180 Q370,80 280,40 Q190,0 120,60 Q50,120 60,220 Q70,320 160,360 Q250,400 320,320 Q390,240 320,180Z" fill="#f47a20"/>
+      </svg>
+      <!-- card cuore -->
+      <div class="deco-card">
+        <svg width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.8">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════ SONDAGGIO ═══════════════ -->
 <div id="survey-wrap">
-  <div style="max-width:900px;margin:0 auto;padding:48px 24px 80px;">
-    <div style="background:#fff;border:1px solid #ebebeb;border-radius:14px;box-shadow:0 2px 20px rgba(0,0,0,.06);overflow:hidden;">
-      <iframe
-        src="https://docs.google.com/forms/d/e/1FAIpQLSejCy0iKbOZ6vKeFMrn_YjAGn_WRnW8qnMV0V7w3aFVBAzzZw/viewform?embedded=true"
-        width="100%"
-        height="1850"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        style="display:block;background:white;">
-        Caricamento…
-      </iframe>
+
+  <div class="survey-area">
+
+    <!-- indicatore step -->
+    <div class="step-indicator" id="step-indicator">
+      <span class="step-pill" id="step-pill">DOMANDA 1 DI 4</span>
+    </div>
+
+    <!-- card domanda -->
+    <div class="q-card" id="q-card">
+
+      <!-- STEP 1 -->
+      <div id="step-1">
+        <div class="q-card-header">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="q-title">Cosa cerchi davvero in un negozio di assistenza e riparazione?</div>
+        </div>
+        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="q1" value="Affidabilità"><div class="opt-box"></div><span>Affidabilità</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Assistenza efficiente"><div class="opt-box"></div><span>Assistenza efficiente</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Soluzioni rapide e mirate"><div class="opt-box"></div><span>Soluzioni rapide e mirate</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Vantaggi post-vendita"><div class="opt-box"></div><span>Vantaggi post-vendita</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Comunicazione chiara e semplice"><div class="opt-box"></div><span>Comunicazione chiara e semplice</span></label>
+        </div>
+        <div class="err" id="err-1">Seleziona almeno un'opzione per continuare.</div>
+        <button class="btn-avanti" id="btn-1" onclick="goNext(1)">
+          AVANTI
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- STEP 2 -->
+      <div id="step-2" style="display:none">
+        <div class="q-card-header">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="q-title">Che problemi hai avuto in passato con negozi di assistenza o riparazione?</div>
+        </div>
+        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="q2" value="Non mi sono sentito capito"><div class="opt-box"></div><span>Non mi sono sentito capito</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Assistenza inesistente o difficile"><div class="opt-box"></div><span>Assistenza inesistente o difficile</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Ambiente disorganizzato"><div class="opt-box"></div><span>Ambiente disorganizzato</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Personale superficiale"><div class="opt-box"></div><span>Personale superficiale</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Troppa attenzione alla vendita"><div class="opt-box"></div><span>Troppa attenzione alla vendita</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Tempi troppo lunghi"><div class="opt-box"></div><span>Tempi troppo lunghi</span></label>
+        </div>
+        <div class="err" id="err-2">Seleziona almeno un'opzione per continuare.</div>
+        <button class="btn-avanti" id="btn-2" onclick="goNext(2)">
+          AVANTI
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- STEP 3 -->
+      <div id="step-3" style="display:none">
+        <div class="q-card-header">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="q-title">Come immagini il negozio di assistenza del futuro?</div>
+        </div>
+        <div class="q-hint">Puoi scegliere più opzioni</div>
+        <div class="opts">
+          <label class="opt"><input type="checkbox" name="q3" value="Un vero polo tecnologico"><div class="opt-box"></div><span>Un vero polo tecnologico</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Corsi per imparare a usare i dispositivi"><div class="opt-box"></div><span>Corsi per imparare a usare i dispositivi</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Servizi legati a nuove tecnologie"><div class="opt-box"></div><span>Servizi legati a nuove tecnologie</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Supporto sulla sicurezza informatica"><div class="opt-box"></div><span>Supporto sulla sicurezza informatica</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Un'app per gestire il proprio dispositivo"><div class="opt-box"></div><span>Un'app per gestire il proprio dispositivo</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Assistenza online"><div class="opt-box"></div><span>Assistenza online</span></label>
+        </div>
+        <div class="err" id="err-3">Seleziona almeno un'opzione per continuare.</div>
+        <button class="btn-avanti" id="btn-3" onclick="goNext(3)">
+          AVANTI
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+      <!-- STEP 4 — risposta aperta -->
+      <div id="step-4" style="display:none">
+        <div class="q-card-header">
+          <div class="q-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="q-title">Se potessi migliorare una sola cosa nei negozi di assistenza… quale sarebbe?</div>
+        </div>
+        <div class="q-hint" style="padding-left:0;margin-top:8px;">
+          Risposta facoltativa — scrivici quello che vuoi
+        </div>
+        <div class="free-area">
+          <textarea id="q4-text" name="q4" maxlength="500"
+            placeholder="Es: mi piacerebbe poter prenotare online, oppure ho apprezzato la velocità della riparazione…"
+          ></textarea>
+          <div class="char-hint"><span id="char-curr">0</span> / 500</div>
+        </div>
+        <!-- nessuna validazione: step 4 è facoltativo -->
+        <button class="btn-avanti" id="btn-4" onclick="submitSurvey()">
+          INVIA
+          <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+
+    </div><!-- /q-card -->
+
+    <!-- tasto indietro -->
+    <div class="step-nav">
+      <button class="btn-back" id="btn-back" onclick="goBack()">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Indietro
+      </button>
+    </div>
+
+  </div><!-- /survey-area -->
+
+  <!-- progress bar -->
+  <div class="progress-bar-wrap" id="progress-bar-wrap">
+    <div class="pb-row">
+      <span class="pb-pct" id="pb-pct">25%</span>
+      <span id="pb-label">1 di 4</span>
+    </div>
+    <div class="pb-track">
+      <div class="pb-fill" id="pb-fill" style="width:25%"></div>
     </div>
   </div>
-</div>
+
+</div><!-- /survey-wrap -->
 
 <!-- ═══════════════ SCHERMATA GRAZIE ═══════════════ -->
 <div class="screen-thanks" id="screen-thanks">
@@ -643,10 +762,10 @@ const FORM_CONFIG = {
 
   // Mappa entry ID → domanda
   entries: {
-    q1: 'entry.1400679975', 
-    q2: 'entry.1250849953', 
-    q3: 'entry.1969141427',
-    q4: 'entry.1258214239',  
+    q1: 'entry.111111111',  // ← sostituisci con entry ID domanda 1
+    q2: 'entry.222222222',  // ← sostituisci con entry ID domanda 2
+    q3: 'entry.333333333',  // ← sostituisci con entry ID domanda 3
+    q4: 'entry.444444444',  // ← sostituisci con entry ID domanda 4
   }
 };
 
@@ -702,32 +821,39 @@ function goBack() {
   if (currentStep > 1) showStep(currentStep - 1);
 }
 
-/* ── INVIO A GOOGLE APPS SCRIPT ─────────────────────────────────── */
+/* ── INVIO A GOOGLE FORM ────────────────────────────────────────── */
 async function submitSurvey() {
   const btn = document.getElementById('btn-4');
   btn.disabled = true;
   btn.textContent = 'Invio…';
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAYzF4EGdKU9ngw--rh3vpNImYiOMlEh-KY-qaeb63yPoOfAYjyidxmmh2VnG-v-wMJQ/exec';
+  const endpoint = `https://docs.google.com/forms/d/e/${FORM_CONFIG.formId}/formResponse`;
+  const body = new URLSearchParams();
 
-  // Raccoglie le risposte
-  const data = {};
+  // q1, q2, q3 — checkbox (più valori possibili)
   ['q1', 'q2', 'q3'].forEach(q => {
-    data[q] = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(el => el.value);
+    document.querySelectorAll(`input[name="${q}"]:checked`).forEach(el => {
+      body.append(FORM_CONFIG.entries[q], el.value);
+    });
   });
-  data.q4 = document.getElementById('q4-text').value.trim();
 
+  // q4 — testo libero
+  const q4val = document.getElementById('q4-text').value.trim();
+  if (q4val) body.append(FORM_CONFIG.entries.q4, q4val);
+
+  // POST no-cors: Google Forms non permette CORS ma registra i dati
   try {
-    await fetch(SCRIPT_URL, {
+    await fetch(endpoint, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: body.toString()
     });
   } catch (e) {
-    console.warn('Errore invio:', e);
+    console.warn('Errore rete durante invio:', e);
   }
 
+  // mostra grazie (sempre, indipendentemente dall'esito)
   showThanks();
 }
 
