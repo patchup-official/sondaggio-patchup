@@ -125,24 +125,28 @@ img { display: block; max-width: 100%; }
   color: var(--orange);
 }
 
-/* decorazione destra — blob organico */
+/* HERO IMMAGINE TEAM */
 .hero-deco {
-  display: flex; align-items: center; justify-content: center;
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 360px;
 }
-.hero-deco svg.blob {
-  width: 100%; max-width: 320px;
-  position: absolute; opacity: .18;
+.hero-deco-bg {
+  position: absolute;
+  inset: 24px 0 24px 0;
+  background: rgba(244, 122, 32, 0.14);
+  border-radius: 36px;
+  clip-path: polygon(8% 10%, 96% 2%, 96% 88%, 78% 88%, 67% 100%, 18% 100%, 18% 88%, 8% 88%);
 }
-.hero-deco .deco-card {
-  position: relative; z-index: 2;
-  background: var(--orange);
-  border-radius: 24px;
-  width: 120px; height: 120px;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 12px 40px rgba(244,122,32,.35);
+.hero-deco img {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 360px;
+  height: auto;
 }
-.hero-deco .deco-card svg { color: #fff; }
 
 /* ══════════════════════════════════════
    AREA SONDAGGIO
@@ -530,16 +534,8 @@ img { display: block; max-width: 100%; }
 
     <!-- decorazione destra -->
     <div class="hero-deco" aria-hidden="true">
-      <!-- blob organico di sfondo -->
-      <svg class="blob" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M320,180 Q370,80 280,40 Q190,0 120,60 Q50,120 60,220 Q70,320 160,360 Q250,400 320,320 Q390,240 320,180Z" fill="#f47a20"/>
-      </svg>
-      <!-- card cuore -->
-      <div class="deco-card">
-        <svg width="52" height="52" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="1.8">
-          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-        </svg>
-      </div>
+      <div class="hero-deco-bg"></div>
+      <img src="team.png" alt="Team PatchUP">
     </div>
   </div>
 </section>
@@ -567,11 +563,12 @@ img { display: block; max-width: 100%; }
         </div>
         <div class="q-hint">Puoi scegliere più opzioni</div>
         <div class="opts">
-          <label class="opt"><input type="checkbox" name="q1" value="Affidabilità"><div class="opt-box"></div><span>Affidabilità</span></label>
-          <label class="opt"><input type="checkbox" name="q1" value="Assistenza efficiente"><div class="opt-box"></div><span>Assistenza efficiente</span></label>
-          <label class="opt"><input type="checkbox" name="q1" value="Soluzioni rapide e mirate"><div class="opt-box"></div><span>Soluzioni rapide e mirate</span></label>
-          <label class="opt"><input type="checkbox" name="q1" value="Vantaggi post-vendita"><div class="opt-box"></div><span>Vantaggi post-vendita</span></label>
-          <label class="opt"><input type="checkbox" name="q1" value="Comunicazione chiara e semplice"><div class="opt-box"></div><span>Comunicazione chiara e semplice</span></label>
+
+          <label class="opt"><input type="checkbox" name="q1" value="Fiducia e parola data"><div class="opt-box"></div><span>puoi fidarti: il personale è di parola</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Risposte rapide e follow-up"><div class="opt-box"></div><span>quando li contatti, rispondono subito e ti seguono</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Soluzioni per le urgenze"><div class="opt-box"></div><span>quando hai un’urgenza, hanno la soluzione giusta e non ti senti solo</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Supporto post-acquisto"><div class="opt-box"></div><span>anche dopo l’acquisto, ti danno supporto e consigli utili</span></label>
+          <label class="opt"><input type="checkbox" name="q1" value="Spiegazioni semplici"><div class="opt-box"></div><span>ti spiegano tutto in modo semplice, senza parole tecniche</span></label>
         </div>
         <div class="err" id="err-1">Seleziona almeno un'opzione per continuare.</div>
         <button class="btn-avanti" id="btn-1" onclick="goNext(1)">
@@ -590,12 +587,13 @@ img { display: block; max-width: 100%; }
         </div>
         <div class="q-hint">Puoi scegliere più opzioni</div>
         <div class="opts">
-          <label class="opt"><input type="checkbox" name="q2" value="Non mi sono sentito capito"><div class="opt-box"></div><span>Non mi sono sentito capito</span></label>
-          <label class="opt"><input type="checkbox" name="q2" value="Assistenza inesistente o difficile"><div class="opt-box"></div><span>Assistenza inesistente o difficile</span></label>
-          <label class="opt"><input type="checkbox" name="q2" value="Ambiente disorganizzato"><div class="opt-box"></div><span>Ambiente disorganizzato</span></label>
-          <label class="opt"><input type="checkbox" name="q2" value="Personale superficiale"><div class="opt-box"></div><span>Personale superficiale</span></label>
-          <label class="opt"><input type="checkbox" name="q2" value="Troppa attenzione alla vendita"><div class="opt-box"></div><span>Troppa attenzione alla vendita</span></label>
-          <label class="opt"><input type="checkbox" name="q2" value="Tempi troppo lunghi"><div class="opt-box"></div><span>Tempi troppo lunghi</span></label>
+
+          <label class="opt"><input type="checkbox" name="q2" value="Proposta non adatta"><div class="opt-box"></div><span>mi hanno proposto qualcosa che non faceva per me</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Difficile contattarli"><div class="opt-box"></div><span>quando li contatto, è difficile parlarci</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Mancanza di aggiornamenti"><div class="opt-box"></div><span>non sanno a che punto è il lavoro o si dimenticano le cose</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Problema non compreso"><div class="opt-box"></div><span>non hanno capito davvero il problema o l’hanno sottovalutato</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Orientati alla vendita"><div class="opt-box"></div><span>pensavano a vendere, non a quello che mi serviva davvero</span></label>
+          <label class="opt"><input type="checkbox" name="q2" value="Attesa eccessiva"><div class="opt-box"></div><span>mi hanno fatto aspettare troppo senza aiutarmi davvero</span></label>
         </div>
         <div class="err" id="err-2">Seleziona almeno un'opzione per continuare.</div>
         <button class="btn-avanti" id="btn-2" onclick="goNext(2)">
@@ -610,16 +608,15 @@ img { display: block; max-width: 100%; }
           <div class="q-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <div class="q-title">Come immagini il negozio di assistenza del futuro?</div>
+          <div class="q-title">Cosa ti aspetti da un negozio di assistenza e riparazione del futuro?</div>
         </div>
         <div class="q-hint">Puoi scegliere più opzioni</div>
         <div class="opts">
-          <label class="opt"><input type="checkbox" name="q3" value="Un vero polo tecnologico"><div class="opt-box"></div><span>Un vero polo tecnologico</span></label>
-          <label class="opt"><input type="checkbox" name="q3" value="Corsi per imparare a usare i dispositivi"><div class="opt-box"></div><span>Corsi per imparare a usare i dispositivi</span></label>
-          <label class="opt"><input type="checkbox" name="q3" value="Servizi legati a nuove tecnologie"><div class="opt-box"></div><span>Servizi legati a nuove tecnologie</span></label>
-          <label class="opt"><input type="checkbox" name="q3" value="Supporto sulla sicurezza informatica"><div class="opt-box"></div><span>Supporto sulla sicurezza informatica</span></label>
-          <label class="opt"><input type="checkbox" name="q3" value="Un'app per gestire il proprio dispositivo"><div class="opt-box"></div><span>Un'app per gestire il proprio dispositivo</span></label>
-          <label class="opt"><input type="checkbox" name="q3" value="Assistenza online"><div class="opt-box"></div><span>Assistenza online</span></label>
+
+          <label class="opt"><input type="checkbox" name="q3" value="Spazio per capire la tecnologia"><div class="opt-box"></div><span>un negozio dove non vai solo a riparare, ma a capire e scoprire la tecnologia</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Nuove tecnologie e auto elettriche"><div class="opt-box"></div><span>assistenza anche su nuove tecnologie (es. auto elettriche)</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="Sicurezza dati e account"><div class="opt-box"></div><span>supporto per proteggere dati, account e dispositivi</span></label>
+          <label class="opt"><input type="checkbox" name="q3" value="App di controllo riparazioni"><div class="opt-box"></div><span>un’app per controllare riparazioni, dispositivi e assistenza</span></label>
         </div>
         <div class="err" id="err-3">Seleziona almeno un'opzione per continuare.</div>
         <button class="btn-avanti" id="btn-3" onclick="goNext(3)">
@@ -641,7 +638,7 @@ img { display: block; max-width: 100%; }
         </div>
         <div class="free-area">
           <textarea id="q4-text" name="q4" maxlength="500"
-            placeholder="Es: mi piacerebbe poter prenotare online, oppure ho apprezzato la velocità della riparazione…"
+            placeholder="Scrivici liberamente il tuo suggerimento..."
           ></textarea>
           <div class="char-hint"><span id="char-curr">0</span> / 500</div>
         </div>
@@ -762,10 +759,10 @@ const FORM_CONFIG = {
 
   // Mappa entry ID → domanda
   entries: {
-    q1: 'entry.111111111',  // ← sostituisci con entry ID domanda 1
-    q2: 'entry.222222222',  // ← sostituisci con entry ID domanda 2
-    q3: 'entry.333333333',  // ← sostituisci con entry ID domanda 3
-    q4: 'entry.444444444',  // ← sostituisci con entry ID domanda 4
+    q1: 'entry.1400679975', 
+    q2: 'entry.1250849953', 
+    q3: 'entry.1969141427',
+    q4: 'entry.1258214239',  
   }
 };
 
@@ -821,39 +818,32 @@ function goBack() {
   if (currentStep > 1) showStep(currentStep - 1);
 }
 
-/* ── INVIO A GOOGLE FORM ────────────────────────────────────────── */
+/* ── INVIO A GOOGLE APPS SCRIPT ─────────────────────────────────── */
 async function submitSurvey() {
   const btn = document.getElementById('btn-4');
   btn.disabled = true;
   btn.textContent = 'Invio…';
 
-  const endpoint = `https://docs.google.com/forms/d/e/${FORM_CONFIG.formId}/formResponse`;
-  const body = new URLSearchParams();
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyAYzF4EGdKU9ngw--rh3vpNImYiOMlEh-KY-qaeb63yPoOfAYjyidxmmh2VnG-v-wMJQ/exec';
 
-  // q1, q2, q3 — checkbox (più valori possibili)
+  // Raccoglie le risposte
+  const data = {};
   ['q1', 'q2', 'q3'].forEach(q => {
-    document.querySelectorAll(`input[name="${q}"]:checked`).forEach(el => {
-      body.append(FORM_CONFIG.entries[q], el.value);
-    });
+    data[q] = [...document.querySelectorAll(`input[name="${q}"]:checked`)].map(el => el.value);
   });
+  data.q4 = document.getElementById('q4-text').value.trim();
 
-  // q4 — testo libero
-  const q4val = document.getElementById('q4-text').value.trim();
-  if (q4val) body.append(FORM_CONFIG.entries.q4, q4val);
-
-  // POST no-cors: Google Forms non permette CORS ma registra i dati
   try {
-    await fetch(endpoint, {
+    await fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString()
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
     });
   } catch (e) {
-    console.warn('Errore rete durante invio:', e);
+    console.warn('Errore invio:', e);
   }
 
-  // mostra grazie (sempre, indipendentemente dall'esito)
   showThanks();
 }
 
